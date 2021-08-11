@@ -57,7 +57,7 @@ body {
     margin-bottom: 2rem;
     opacity: 0;
     -webkit-text-stroke: 34px rgba(206, 206, 206, 0);
-    animation: moveInfo .8s 0.7s forwards;
+    animation: moveInfo 5s 0.7s forwards;
     margin: 3rem;
     text-transform: uppercase;
 }
@@ -75,7 +75,11 @@ body {
     border-radius: 25px;
     cursor: pointer;
     opacity: 0;
-    animation: moveInfo 1s 0.9s forwards;
+    animation: moveInfo 5s 0.9s forwards;
+}
+
+.efeito:hover {
+    opacity: .6;
 }
 
 @keyframes moveInfo {
