@@ -423,3 +423,9 @@ label, input {
     position: relative;
     bottom: 3.6rem;
 }
+
+#div-usuarios-esq {
+    display: block;
+    position: relative;
+    bottom: 4.7rem;
+}
