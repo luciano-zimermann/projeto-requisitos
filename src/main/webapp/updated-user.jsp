@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Registered User</title>
+<title>Updated User</title>
 </head>
 <body>
-	<h3>Usuário cadastrado com sucesso!</h3>
+	<h3>Usuário atualizado com sucesso!</h3>
 	<br>
 	<a href="usuarios.jsp">Voltar</a>
 </body>

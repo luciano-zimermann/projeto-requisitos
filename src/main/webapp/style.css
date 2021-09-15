@@ -283,19 +283,6 @@ label, input {
     border-bottom: solid 2px white;
 }
 
-.activeUser {
-    margin-top: -1rem;
-}
-
-.activeUser p {
-    color: white;
-    text-transform: uppercase;
-    text-align: right;
-    margin-right: 2rem;
-    padding-bottom: .3rem;
-    font-size: .8rem;
-}
-
 .titulo-tabela {
     display: flex;
     justify-content: center;
@@ -433,7 +420,7 @@ label, input {
 .btn-edit {
 	border: solid 1px black;
 	border-radius: .3rem;
-	background-color: blue;
+	background-color: aqua;
 	color: black;
 	font-family: Calibri;
 	font-size: 14px;
@@ -446,7 +433,7 @@ label, input {
 .btn-delete {
 	border: solid 1px black;
 	border-radius: .3rem;
-	background-color: salmon;
+	background-color: red;
 	color: black;
 	font-family: Calibri;
 	font-size: 14px;

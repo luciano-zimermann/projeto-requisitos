@@ -39,7 +39,7 @@ public class UserData implements DataCrud
 				stmt.setString( 1, user.getUsrName() );
 				stmt.setString( 2, user.getUsrLogin() );
 				stmt.setString( 3, user.getUsrPassword() );
-				stmt.setString( 4, String.valueOf(user.getUsrPermission() ) );
+				stmt.setString( 4, user.getUsrPermission() );
 				stmt.execute();
 			}
 			
@@ -57,7 +57,7 @@ public class UserData implements DataCrud
 		{
 			User user = (User) data;
 			
-			String sql = "UPDATE users SET usr_name = ?, usr_login = ?, usr_password = ?, usr_permission = ? WHERE usr_id = ?";
+			String sql = "UPDATE users SET usr_name = ?, usr_login = ?, usr_password = ?, usr_permission = ? WHERE usr_id = " + user.getUsrId();
 			
 			try
 			{
@@ -65,7 +65,7 @@ public class UserData implements DataCrud
 				stmt.setString( 1, user.getUsrName() );
 				stmt.setString( 2, user.getUsrLogin() );
 				stmt.setString( 3, user.getUsrPassword() );
-				stmt.setString( 4, String.valueOf(user.getUsrPermission() ) );
+				stmt.setString( 4, user.getUsrPermission() );
 				stmt.execute();
 			}
 			
@@ -87,7 +87,7 @@ public class UserData implements DataCrud
 			
 			try
 			{
-				stmt = (PreparedStatement) con.prepareStatement(sql);
+				stmt = (PreparedStatement) con.prepareStatement( sql );
 				stmt.setInt( 1, user.getUsrId() );
 				stmt.execute();
 			}
@@ -118,7 +118,7 @@ public class UserData implements DataCrud
             	user.setUsrName( response.getString( "usr_name" ) );
             	user.setUsrLogin( response.getString( "usr_login" ) );
             	user.setUsrPassword( response.getString( "usr_password" ) );
-            	user.setUsrPermission( response.getString( "usr_permission" ).charAt(0) );
+            	user.setUsrPermission( response.getString( "usr_permission" ) );
             	
             	users.add( user );
             }
@@ -134,6 +134,8 @@ public class UserData implements DataCrud
 	
 	public boolean validateLogin( String login, String password ) throws Exception
 	{
+		boolean validate = false;
+		
 		String sql = "SELECT * FROM users WHERE usr_login = + '" + login + 
 					 "' AND usr_password = '" + password + "'";
 		
@@ -142,12 +144,59 @@ public class UserData implements DataCrud
 		
 		if ( resultSet.next() )
 		{
-			return true;
+			validate = true;
 		}
 		
-		else
+		return validate;
+	}
+	
+	public User getUserById( Integer usrId ) throws Exception
+	{		
+		User user = new User();
+		String sql = "SELECT * FROM users";
+		
+		PreparedStatement statement = con.prepareStatement( sql );
+		ResultSet resultSet = statement.executeQuery();
+		
+		while ( resultSet.next() )
 		{
-			return false;
+			if ( usrId == resultSet.getInt( 1 ) )
+			{
+				String usrName = resultSet.getString( 2 );
+				String usrLogin = resultSet.getString( 3 );
+				String usrPassword = resultSet.getString( 4 );
+				String usrPermission = resultSet.getString( 5 );				
+
+				user.setUsrId( usrId );
+				user.setUsrName( usrName );
+				user.setUsrLogin( usrLogin );
+				user.setUsrPassword( usrPassword );
+				user.setUsrPermission( usrPermission );
+			}
 		}
+		
+		return user;
+	}
+	
+	public User getUserByLoginAndPassword( String login, String password ) throws Exception
+	{
+		String sql = "SELECT * FROM users WHERE usr_login = '" + login + "' AND usr_password = '" + password + "';";
+		System.out.println( sql );
+		
+		PreparedStatement statement = con.prepareStatement( sql );
+		ResultSet resultSet = statement.executeQuery();
+		
+		User user = new User();
+		
+		if ( resultSet != null && resultSet.next() )
+		{
+			user.setUsrId( resultSet.getInt( "usr_id" ) );
+			user.setUsrName( resultSet.getString( "usr_name" ) );
+			user.setUsrLogin( resultSet.getString( "usr_login" ) );
+			user.setUsrPassword( resultSet.getString( "usr_password" ) );
+			user.setUsrPermission( resultSet.getString( "usr_permission" ) );	
+		}
+		
+		return user;
 	}
 }

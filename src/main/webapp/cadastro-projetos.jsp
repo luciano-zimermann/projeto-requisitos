@@ -9,7 +9,7 @@
 
 <body style="background-image: url(images/bg-login.jfif);">
 
-    <a id="voltar" href="conta.jsp">Voltar</a>
+    <a id="voltar" href="projetos.jsp">Voltar</a>
 
     <div class="escopo">
         <h1>Projetos</h1>

@@ -7,15 +7,10 @@
 </head>
 <body style="background-image: url(images/bg-login.jfif);">
 
-        <a id="voltar" href="conta.jsp">Voltar</a>
+        <a id="voltar" href="login.jsp">Voltar</a>
 
         <div class="titulo-tabela">
             <h1>Projetos</h1>
-        </div>
-
-        <div class="activeUser">
-            <p>Usuário Logado: Fulano</p>
-            <p>Tipo: Administrador</p> 
         </div>
 
     <div class="usr-prj">

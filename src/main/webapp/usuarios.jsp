@@ -5,7 +5,7 @@
 <%
 	String message = null;
 	String validator = request.getParameter( "id" );
-
+	
 	if ( validator == null )
 	{
 		message = "Usuário não excluído, tente novamente mais tarde";
@@ -19,7 +19,7 @@
 		
 		userData.delete( user );
 		
-		response.sendRedirect("successful-deleting-user.jsp");
+		response.sendRedirect( "successful-deleting-user.jsp" );
 	}
 %>
 
@@ -40,15 +40,10 @@
 </head>
 <body style="background-image: url(images/bg-login.jfif);">
 
-        <a id="voltar" href="conta.jsp">Voltar</a>
+        <a id="voltar" href="login.jsp">Voltar</a>
 
         <div class="titulo-tabela">
             <h1>Usuários</h1>
-        </div>
-
-        <div class="activeUser">
-            <p>Usuário Logado: Fulano</p>
-            <p>Tipo: Administrador</p> 
         </div>
 
     <div class="usr-prj">
@@ -81,7 +76,7 @@
                     <td><%= u.getUsrLogin() %></td>
                     <td><%= u.getUsrPassword() %></td>
                     <td><%= u.getUsrPermission() %></td>
-                    <td><a href="#" class="btn-edit">Editar</a></td>
+                    <td><a href="UserServlet?action=upd&id=<%=u.getUsrId()%>" class="btn-edit">Editar</a></td>
                     <td><a href="?id=<%=u.getUsrId()%> "class="btn-delete"> Excluir</a></td>
                 </tr>
                 

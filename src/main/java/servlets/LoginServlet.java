@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.User;
 import utilities.LoginUtilities;
+import utilities.UserUtilities;
 
 /**
  * Servlet implementation class LoginServlet
@@ -46,22 +48,47 @@ public class LoginServlet extends HttpServlet
 		
 		boolean validateLogin = LoginUtilities.validateLogin( login, password );
 		
-		if ( validateLogin )
-		{	
-			if ( login.isEmpty() )
-			{
-				response.sendRedirect( "login.jsp" );
+		try
+		{
+			User user = new User();
+			
+			if ( validateLogin )
+			{	
+				if ( login.isEmpty() )
+				{
+					response.sendRedirect( "login.jsp" );
+				}
+				
+				else
+				{	
+					user = UserUtilities.getUserByLoginAndPassword( login, password );
+					boolean userIsAdmin = user.getUsrPermission().equals( "administrador" )
+										|| user.getUsrPermission().equals( "administrator" );
+					
+					if ( user != null )
+					{	
+						if ( userIsAdmin ) 
+						{
+							response.sendRedirect( "administrator-account.jsp" );
+						}
+						
+						else
+						{
+							response.sendRedirect( "user-account.jsp" );
+						}
+					}
+				}
 			}
 			
 			else
 			{
-	        	response.sendRedirect( "conta.jsp" );	
+				response.sendRedirect( "login-error.jsp" );	
 			}
 		}
 		
-		else
+		catch ( Exception e )
 		{
-			response.sendRedirect( "login-error.jsp" );	
+			e.printStackTrace();
 		}
 	}
 }

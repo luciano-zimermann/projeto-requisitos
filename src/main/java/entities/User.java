@@ -1,20 +1,18 @@
 package entities;
 
-import utilities.UserUtilities;
-
 public class User 
 {
 	private Integer usrId;
 	private String usrName;
 	private String usrLogin;
 	private String usrPassword;
-	private char usrPermission;
+	private String usrPermission;
 	
 	public User()
 	{	
 	}
 
-	public User( String usrName, String usrLogin, String usrPassword, char usrPermission ) 
+	public User( String usrName, String usrLogin, String usrPassword, String usrPermission ) 
 	{
 		this.usrName = usrName;
 		this.usrLogin = usrLogin;
@@ -62,12 +60,12 @@ public class User
 		this.usrPassword = usrPassword;
 	}
 
-	public char getUsrPermission() throws Exception 
+	public String getUsrPermission() throws Exception 
 	{	
 		return usrPermission;
 	}
 
-	public void setUsrPermission( char usrPermission ) throws Exception 
+	public void setUsrPermission( String usrPermission ) throws Exception 
 	{		
 		this.usrPermission = usrPermission;
 	}
