@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet
 	{
 		doGet( request, response );
 		
-		String id = request.getParameter("id");
+		String id = request.getParameter( "id" );
 		String name = request.getParameter( "name" );
 		String login = request.getParameter( "login" );
 		String password = request.getParameter( "password" );

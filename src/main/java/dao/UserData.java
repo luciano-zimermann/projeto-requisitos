@@ -181,7 +181,6 @@ public class UserData implements DataCrud
 	public User getUserByLoginAndPassword( String login, String password ) throws Exception
 	{
 		String sql = "SELECT * FROM users WHERE usr_login = '" + login + "' AND usr_password = '" + password + "';";
-		System.out.println( sql );
 		
 		PreparedStatement statement = con.prepareStatement( sql );
 		ResultSet resultSet = statement.executeQuery();
@@ -199,4 +198,25 @@ public class UserData implements DataCrud
 		
 		return user;
 	}
+	
+//	public User getUserByName( String name ) throws Exception 
+//	{
+//		String sql = "SELECT * FROM users WHERE usr_name = '" + name + " ' ";
+//		
+//		PreparedStatement statement = con.prepareStatement( sql );
+//		ResultSet resultSet = statement.executeQuery();
+//		
+//		User user = new User();
+//		
+//		if ( resultSet != null )
+//		{
+//			user.setUsrId( resultSet.getInt( "usr_id" ) );
+//			user.setUsrName( resultSet.getString( "usr_name" ) );
+//			user.setUsrLogin( resultSet.getString( "usr_login" ) );
+//			user.setUsrPassword( resultSet.getString( "usr_password" ) );
+//			user.setUsrPermission( resultSet.getString( "usr_permission" ) );	
+//		}
+//		
+//		return user;
+//	}
 }

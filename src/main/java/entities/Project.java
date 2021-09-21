@@ -16,9 +16,8 @@ public class Project
 	{
 	}
 	
-	public Project( Integer prjId, String prjDescription, String prjCustomer, String prjStatus, Date prjStartDate,Date prjEndDate, User prjOwner ) 
+	public Project( String prjDescription, String prjCustomer, String prjStatus, Date prjStartDate,Date prjEndDate, User prjOwner ) 
 	{
-		this.prjId = prjId;
 		this.prjDescription = prjDescription;
 		this.prjCustomer = prjCustomer;
 		this.prjStatus = prjStatus;
@@ -96,7 +95,4 @@ public class Project
 	{
 		this.prjOwner = prjOwner;
 	}
-	
-	
-
 }

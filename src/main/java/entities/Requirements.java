@@ -6,19 +6,20 @@ public class Requirements
 	private String reqCode;
 	private String reqRequeriment;
 	private String reqDescription;
-	private RequirementsVersion reqVersion;
+	private Integer reqVersion;
+	private String reqJustification;
 	
 	public Requirements()
 	{
 	}
 
-	public Requirements( Integer reqId, String reqCode, String reqRequeriment, String reqDescription,RequirementsVersion reqVersion ) 
+	public Requirements( String reqCode, String reqRequeriment, String reqDescription, Integer reqVersion, String reqJustification ) 
 	{
-		this.reqId = reqId;
 		this.reqCode = reqCode;
 		this.reqRequeriment = reqRequeriment;
 		this.reqDescription = reqDescription;
 		this.reqVersion = reqVersion;
+		this.reqJustification = reqJustification;
 	}
 
 	public Integer getReqId() 
@@ -61,15 +62,23 @@ public class Requirements
 		this.reqDescription = reqDescription;
 	}
 
-	public RequirementsVersion getReqVersion() 
+	public Integer getReqVersion() 
 	{
 		return reqVersion;
 	}
 
-	public void setReqVersion( RequirementsVersion reqVersion ) 
+	public void setReqVersion( Integer reqVersion ) 
 	{
 		this.reqVersion = reqVersion;
 	}
 	
+	public String getReqJustification() 
+	{
+		return reqJustification;
+	}
 	
+	public void setReqJustification( String reqJustification ) 
+	{
+		this.reqJustification = reqJustification;
+	}
 }

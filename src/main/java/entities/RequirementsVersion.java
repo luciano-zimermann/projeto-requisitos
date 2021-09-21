@@ -1,5 +1,6 @@
 package entities;
 
+@Deprecated
 public class RequirementsVersion 
 {
 	private Integer vrsId;

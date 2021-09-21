@@ -28,10 +28,10 @@
                     <input type="password" id="password" name="password" required="required">
                     <label>Permissão</label>
                     <select id="permission" name="permission">
-                        <option value="administrator">
+                        <option>
                             Administrador
                         </option>
-                        <option value="user">
+                        <option>
                             Usuário
                         </option>
                     </select>

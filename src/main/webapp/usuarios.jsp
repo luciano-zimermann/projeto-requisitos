@@ -40,7 +40,7 @@
 </head>
 <body style="background-image: url(images/bg-login.jfif);">
 
-        <a id="voltar" href="login.jsp">Voltar</a>
+        <a id="voltar" href="administrator-account.jsp">Voltar</a>
 
         <div class="titulo-tabela">
             <h1>Usuários</h1>
@@ -63,12 +63,12 @@
                     <th>Permissão</th>
                 <tr>
                 <%
-                	UserData userData = new UserData();
-                
-                	List<User> usersList = userData.listUsers();
-                	
-                	for ( User u : usersList )
-                	{
+                UserData userData = new UserData();
+                                
+                List<User> usersList = userData.listUsers();
+                        	
+                for ( User u : usersList )
+                {
                 %>
                 <tr>
                 	<td><%= u.getUsrId() %></td>
@@ -78,10 +78,9 @@
                     <td><%= u.getUsrPermission() %></td>
                     <td><a href="UserServlet?action=upd&id=<%=u.getUsrId()%>" class="btn-edit">Editar</a></td>
                     <td><a href="?id=<%=u.getUsrId()%> "class="btn-delete"> Excluir</a></td>
-                </tr>
-                
+                </tr>                
                 <%
-                	}
+                }
                 %>
             </table>
         </div>

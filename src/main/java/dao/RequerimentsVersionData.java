@@ -11,6 +11,7 @@ import connection.ConnectionDAO;
 import connection.DataCrud;
 import entities.RequirementsVersion;
 
+@Deprecated
 public class RequerimentsVersionData implements DataCrud
 {
     ConnectionDAO conexao = new ConnectionDAO();

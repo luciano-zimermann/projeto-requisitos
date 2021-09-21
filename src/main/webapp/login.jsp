@@ -1,4 +1,3 @@
-<%@ page import="servlets.LoginServlet" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

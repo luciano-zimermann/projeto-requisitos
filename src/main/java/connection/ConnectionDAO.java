@@ -23,12 +23,12 @@ public class ConnectionDAO
         
         catch ( ClassNotFoundException ex ) 
         {
-            System.out.println( "Erro ao conectar a database " + ex );
+            System.out.println( "The class wyyfound" + ex );
         } 
         
         catch ( SQLException ex ) 
         {
-            System.out.println( "Erro ao conectar a database " + ex );
+            System.out.println( "There are an error on the SQL" + ex );
         }
 
         return connection;

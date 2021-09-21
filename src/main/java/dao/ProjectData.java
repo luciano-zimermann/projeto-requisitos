@@ -11,7 +11,6 @@ import java.util.List;
 import connection.ConnectionDAO;
 import connection.DataCrud;
 import entities.Project;
-import entities.RequirementsVersion;
 import entities.User;
 
 public class ProjectData implements DataCrud 
@@ -36,9 +35,9 @@ public class ProjectData implements DataCrud
 				stmt.setString( 1, project.getPrjDescription() );
 				stmt.setString( 2, project.getPrjCustomer() );
 				stmt.setString( 3, project.getPrjStatus() );
-				stmt.setDate( 4, (Date) project.getPrjStartDate() );
-				stmt.setDate( 5, (Date) project.getPrjEndDate() );
-				stmt.setObject( 6, project.getPrjOwner() );
+				stmt.setDate( 4, new java.sql.Date( project.getPrjStartDate().getTime() ) );
+				stmt.setDate( 5, new java.sql.Date( project.getPrjEndDate().getTime() ) );
+				stmt.setInt( 6, project.getPrjOwner().getUsrId() );
 				stmt.execute();
 			}
 			
@@ -57,7 +56,7 @@ public class ProjectData implements DataCrud
 			Project project = (Project) data;
 			
 			String sql = "UPDATE projects SET prj_description = ?, prj_customer = ?, prj_status = ?, prj_start_date = ?, prj_end_date = ?,"
-					   + " prj_usr_owner_ref = ? WHERE vrs_id = ?";
+					   + " prj_usr_owner_ref = ? WHERE prj_id = '" + project.getPrjId() + " ' ";
 			
 			try
 			{
@@ -65,9 +64,9 @@ public class ProjectData implements DataCrud
 				stmt.setString( 1, project.getPrjDescription() );
 				stmt.setString( 2, project.getPrjCustomer() );
 				stmt.setString( 3, project.getPrjStatus() );
-				stmt.setDate( 4, (Date) project.getPrjStartDate() );
-				stmt.setDate( 5, (Date) project.getPrjEndDate() );
-				stmt.setObject( 6, project.getPrjOwner() );
+				stmt.setDate( 4, new java.sql.Date( project.getPrjStartDate().getTime() ) );
+				stmt.setDate( 5, new java.sql.Date( project.getPrjEndDate().getTime() ) );
+				stmt.setInt( 6, project.getPrjOwner().getUsrId() );
 				stmt.execute();
 			}
 			
@@ -85,7 +84,7 @@ public class ProjectData implements DataCrud
 		{
 			Project project = (Project) data;
 			
-			String sql = "DELETE FROM projects WHERE vrs_id = ?";
+			String sql = "DELETE FROM projects WHERE prj_id = ?";
 			
 			try
 			{
@@ -117,22 +116,76 @@ public class ProjectData implements DataCrud
             	Project project = new Project();
             	
             	project.setPrjId( response.getInt( "prj_id" ) );
-            	project.setPrjDescription( response.getString( "vrs_description" ) );
+            	project.setPrjDescription( response.getString( "prj_description" ) );
             	project.setPrjCustomer( response.getString( "prj_customer" ) );
             	project.setPrjStatus( response.getString( "prj_status" ) );
             	project.setPrjStartDate( response.getDate( "prj_start_date" ) );
             	project.setPrjEndDate( response.getDate( "prj_end_date" ) );
-            	project.setPrjOwner( (User) response.getObject( "prj_usr_owner_ref" ) );
+            	project.setPrjOwner( getUser( response.getInt( "prj_usr_owner_ref" ) ) );
             	
             	projects.add( project );
             }
 		}
 		
-		catch ( SQLException ex )
+		catch ( Exception ex )
 		{
 			ex.printStackTrace();
 		}
 		
         return projects;
+	}
+	
+	public Project getProjectById( Integer id ) throws Exception
+	{		
+		Project project = new Project();
+		String sql = "SELECT * FROM projects";
+		
+		PreparedStatement statement = con.prepareStatement( sql );
+		ResultSet resultSet = statement.executeQuery();
+		
+		while ( resultSet.next() )
+		{
+			if ( id == resultSet.getInt( 1 ) )
+			{
+				String description = resultSet.getString( 2 );
+				String customer = resultSet.getString( 3 );
+				String status = resultSet.getString( 4 );
+				Date startDate = resultSet.getDate( 5 );
+				Date endDate = resultSet.getDate( 6 );
+				User owner = getUser( resultSet.getInt( 7 ) );
+
+				project.setPrjId( id );
+				project.setPrjDescription( description );
+				project.setPrjCustomer( customer );
+				project.setPrjStatus( status );
+				project.setPrjStartDate( startDate );
+				project.setPrjEndDate( endDate );
+				project.setPrjOwner( owner );	
+			}
+		}
+		
+		return project;
+	}
+	
+	public User getUser( int userId ) throws Exception
+	{
+		UserData ud = new UserData();
+		User user = new User();
+		
+		for ( User u : ud.listUsers() )
+		{
+			if ( u.getUsrId() == userId )
+			{
+				user.setUsrId( u.getUsrId() );
+				user.setUsrName( u.getUsrName() );
+				user.setUsrLogin( u.getUsrLogin() );
+				user.setUsrPassword( u.getUsrPassword() );
+				user.setUsrPermission( u.getUsrPermission() );
+			}
+			
+			break;
+		}
+		
+		return user;
 	}
 }
